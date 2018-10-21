@@ -4,6 +4,7 @@ import aiohttp
 import random
 import json
 import magic_py_ball
+import datetime
 import asyncio
 import time
 import os
@@ -23,7 +24,8 @@ async def on():
 async def eightball(ctx, question):
     choice = magic_py_ball.answer(question)
     embed = discord.Embed(color = 0x00ff00)
-    embed.add_field(name= question, value = choice, inline = False)
+    embed.add_field(name= "**" +question+"**", value = choice, inline = False)
+    embed.set_footer(icon_url=author.avatar_url, text="Fun Commands!")
     await client.say(embed=embed)
     return     
 
@@ -115,7 +117,7 @@ async def kick(ctx, user: discord.Member = None, *, reason = None):
             await client.send_message(user, f"You were kicked from **{server.name}** for the reason of: **{reason}**")
             await client.kick(user)
             await client.say(f":white_check_mark:***Kicked {user.mention}***")
-            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was kicked")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}**")
             await client.send_message(channels, embed=embed)
@@ -145,7 +147,7 @@ async def ban(ctx, user: discord.Member = None, *, reason = None):
             await client.send_message(user, f"You were banned from **{server.name}** for the reason of: **{reason}**")
             await client.ban(user)
             await client.say(f":white_check_mark:***Banned {user.mention}***")
-            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was banned")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}**")
             await client.send_message(channels, embed=embed)
@@ -179,7 +181,7 @@ async def mute(ctx, user: discord.Member = None, *, reason = None):
             await client.add_roles(user, MutedRole)
             await client.send_message(user, f"You were muted in **{ctx.message.server.name}** for the reason of: **{reason}**")
             await client.say(f":white_check_mark:***Muted {user.mention}***")
-            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was kicked")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}** \n :thinking:Role:**{MutedRole}**")
             await client.send_message(channels, embed=embed)
@@ -213,7 +215,7 @@ async def unmute(ctx, user: discord.Member = None):
             await client.remove_roles(user, MutedRole)
             await client.send_message(user, f"You were unmuted in **{ctx.message.server.name}**")
             await client.say(f":white_check_mark:***Unmuted {user.mention}***")
-            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was unmuted")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :thinking:Role:**{MutedRole}**")
             await client.send_message(channels, embed=embed)
@@ -242,9 +244,9 @@ async def purge(ctx, *, amount: int = None):
                 messages.append(message)
             await client.delete_messages(messages)
             await client.say(f":white_check_mark:***Cleared {amount}***")
-            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Chat Was Cleared")
-            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}**\n :thinking:\Amount:**{amount}**\n:inbox_tray:Channel:****{channel.mention}**")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}**\n :thinking:Amount:**{amount}**\n:inbox_tray:Channel:**{channel.mention}**")
             await client.send_message(channels, embed=embed)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Manage Messages`` permissions!")
