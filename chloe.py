@@ -40,27 +40,17 @@ async def cooldown_error(error, ctx):
         await client.say(embed=embed)
         
 #CONFIRGURING
-
 @client.command(pass_context=True)
 async def setmod(ctx, *, channel_name = None):
     with open("Mod-data.json", "r") as f:
         mod = json.load(f)
     channel = ctx.message.channel
     mod-channel = discord.utils.get(ctx.message.server.channels, name = channel_name)
-    no-channel = discord.utils.get(ctx.message.server.channels, name = channel)
     if ctx.message.author.server_permissions.manage_server:
-        if channel_name is None:
-
-            if not ctx.message.server.id in mod:
-                mod[ctx.message.server.id] = {}
-                mod[ctx.message.server.id]["mod-channel"] = "defualt"
-            mod[ctx.message.server.id]["mod-channel"] = no-channel
-            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-            embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{no-channel}***", inline=False)
-            await client.say(embed=embed)
+        if mod-channel is None:
+            await client.say("Please specify a channel in this server!")
             return
         if not ctx.message.server.id in mod:
-            
             mod[ctx.message.server.id] = {}
             mod[ctx.message.server.id]["mod-channel"] = "defualt"
         mod[ctx.message.server.id]["mod-channel"] = mod-channel
@@ -73,14 +63,6 @@ async def setmod(ctx, *, channel_name = None):
         json.dump(mod,f,indent=4)
         
         
-#@client.command(pass_context = True)
-#async def setwelcomechannel(ctx, welcomechannel = None):
-    #if ctx.message.author.server_permissions.manage.server:
-        #with open("welcomeleave.json", "r") as f:
-        #channel = json.load(f)
-        #if welcomechannel is None:
-            #await client.say("Please specify a channel") --making this into embeds later
-            #Return
 
 #UTILITY
 
