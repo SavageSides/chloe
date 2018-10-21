@@ -30,6 +30,33 @@ async def on_ready():
 @client.command()
 async def on():
     await client.say("I am online on heroku! Wrong, and Savage")
+   
+
+@client.command(pass_context=True)
+async def suggestion(ctx, *, suggestion = None):
+    server = client.get_server("498179637990522880")
+    channel = client.get_channel("503667719015497741")
+    embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+    embed.add_field(name=":white_check_mark: Sucess", value="**[Suggestion was sent](https://discord.gg/fzAVzp)**", inline=False)
+    await client.say(embed=embed)
+    embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+    embed.add_field(name="Suggestion Occured", value="Following Data is collected below!", inline=False)
+    embed.add_field(name="Author:", value=f"{ctx.message.author.name}", inline=False)
+    embed.add_field(name="Suggestion:", value=f"***{suggestion}***", inline=False)
+    await client.send_message(channel, embed=embed)
+    
+@client.command(pass_context=True)
+async def bug(ctx, *, suggestion = None):
+    server = client.get_server("498179637990522880")
+    channel = client.get_channel("503667719015497741")
+    embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+    embed.add_field(name=":white_check_mark: Sucess", value="**[Bug will be resolved as quick as possible!](https://discord.gg/fzAVzp)**", inline=False)
+    await client.say(embed=embed)
+    embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+    embed.add_field(name="Bug Occured", value="Following Data is collected below!", inline=False)
+    embed.add_field(name="Author:", value=f"{ctx.message.author.name}", inline=False)
+    embed.add_field(name="Bug:", value=f"***{suggestion}***", inline=False)
+    await client.send_message(channel, embed=embed)
     
 @client.command(pass_context=True)
 async def help(ctx):
