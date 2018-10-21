@@ -147,6 +147,7 @@ async def ban(ctx, user: discord.Member = None, *, reason = None):
 async def mute(ctx, user: discord.Member = None, *, reason = None):
     with open("Mod-data.json", "r") as f:
         mute = json.load(f)
+    author = ctx.message.author
     role = mute[ctx.message.server.id]["mute-role"]
     MutedRole = discord.utils.get(ctx.message.server.roles, name = role)
     modchannel = mute[ctx.message.server.id]["mod-channel"]
@@ -161,7 +162,7 @@ async def mute(ctx, user: discord.Member = None, *, reason = None):
                 return
             await client.add_roles(user, MutedRole)
             await client.send_message(user, f"You were muted in **{ctx.message.server.name}** for the reason of: **{reason}**")
-            await client.say(":white_check_mark:***Muted {user.mention}***")
+            await client.say(f":white_check_mark:***Muted {user.mention}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
             embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was kicked")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}** \n :thinking:Role:**{MutedRole}**")
