@@ -300,6 +300,7 @@ async def removerole(ctx, user: discord.Member = None, *, name = None):
                 return
             await client.remove_roles(user, role)
             await client.say(f":white_check_mark:***Removed {name} from {user.name}***")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Removed Role")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}** \n :wave:User: **{user.name}**")
             await client.send_message(channels, embed=embed)
