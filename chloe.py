@@ -64,7 +64,7 @@ async def help(ctx):
     embed.add_field(name="Help", value="If you need help controling me join the [support server](https://discord.gg/V3TG65a)")
     embed.add_field(name="Fun Commands", value="``?rate`` ``?meme`` ``?8ball`` ``?on``", inline=False)
     embed.add_field(name="Config Commands", value="``?setmod`` ``?setmute`` ``?setwelcome`` ``?setgoodbye`` ``?setchannel``", inline=False)
-    embed.add_field(name="Utility Commands", value="``?serverinfo`` ``?userinfo`` ``?avatar``", inline=False)
+    embed.add_field(name="Utility Commands", value="``?serverinfo`` ``?userinfo`` ``?avatar`` ``?giveaway`` ``?suggestion`` ``?bug``", inline=False)
     embed.add_field(name="Roleplay Commands", value="``?crole`` ``?drole`` ``?addrole`` ``?removerole`` ``?rolecolor``", inline=False)
     embed.add_field(name="Moderation Commands", value="``?kick`` ``?ban`` ``?mute`` ``?unmute`` ``?purge``", inline=False)
     embed.add_field(name="Currency Commands", value="``?addmoney`` ``?removemoney`` ``?work`` ``?daily`` ``?slots`` ``?givemoney`` ``?crate`` ``?crates`` ``?bal``", inline=False)
@@ -1111,7 +1111,7 @@ async def giveaway(ctx):
                 ga_users=[]
                 for user in await client.get_reaction_users(ga_message.reactions[0]):
                     ga_users.append(user.mention)
-                ga_client = ctx.message.server.get_member('500854299455127563') #giveaways id 396464677032427530
+                ga_client = ctx.message.server.get_member('503386558976622593') #giveaways id 396464677032427530
                 ga_users.remove(ga_client.mention)
                 if len(ga_users) == 0:
                     error = discord.Embed(title=":warning: Error!",description="The giveaway ended with no participants, could not chose a winner",color=0xff0000)
