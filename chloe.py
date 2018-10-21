@@ -50,6 +50,7 @@ async def setmod(ctx, *, channel_name = None):
     no-channel = discord.utils.get(ctx.message.server.channels, name = channel)
     if ctx.message.author.server_permissions.manage_server:
         if channel_name is None:
+
             if not ctx.message.server.id in mod:
                 mod[ctx.message.server.id] = {}
                 mod[ctx.message.server.id]["mod-channel"] = "defualt"
@@ -59,15 +60,16 @@ async def setmod(ctx, *, channel_name = None):
             await client.say(embed=embed)
             return
         if not ctx.message.server.id in mod:
-             mod[ctx.message.server.id] = {}
-             mod[ctx.message.server.id]["mod-channel"] = "defualt"
+            
+            mod[ctx.message.server.id] = {}
+            mod[ctx.message.server.id]["mod-channel"] = "defualt"
         mod[ctx.message.server.id]["mod-channel"] = mod-channel
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
         embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{no-channel}***", inline=False)
         await client.say(embed=embed)
-   else:  
-        await client.say("{ctx.message.author.mention} you don't have permissions for this! Permission: ``Manage Server``")
-   with open("Mod-data.json", "w") as f:
+    else:
+        await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
+    with open("Mod-data.json", "w") as f:
         json.dump(mod,f,indent=4)
         
         
