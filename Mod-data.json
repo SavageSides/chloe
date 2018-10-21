@@ -1,1 +1,6 @@
-{"503242054961201170": {"mod-channel": "notes"}}
+{
+    "503242054961201170": {
+        "mod-channel": "notes",
+        "mute-role": "Muted"
+    }
+}
