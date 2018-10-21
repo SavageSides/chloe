@@ -41,41 +41,43 @@ async def cooldown_error(error, ctx):
         
 #CONFIRGURING
 
+@client.command(pass_context=True)
+async def setmod(ctx, *, channel_name = None):
+    with open("Mod-data.json", "r") as f:
+        mod = json.load(f)
+    channel = ctx.message.channel
+    mod-channel = discord.utils.get(ctx.message.server.channels, name = channel_name)
+    no-channel = discord.utils.get(ctx.message.server.channels, name = channel)
+    if ctx.message.author.server_permissions.manage_server:
+        if channel_name is None:
+            if not ctx.message.server.id in mod:
+                mod[ctx.message.server.id] = {}
+                mod[ctx.message.server.id]["mod-channel"] = "defualt"
+            mod[ctx.message.server.id]["mod-channel"] = no-channel
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{no-channel}***", inline=False)
+            await client.say(embed=embed)
+            return
+        if not ctx.message.server.id in mod:
+             mod[ctx.message.server.id] = {}
+             mod[ctx.message.server.id]["mod-channel"] = "defualt"
+        mod[ctx.message.server.id]["mod-channel"] = mod-channel
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+        embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{no-channel}***", inline=False)
+        await client.say(embed=embed)
+   else:
+        await client.say("{ctx.message.author.mention} you don't have permissions for this! Permission: ``Manage Server``")
+   with open("Mod-data.json", "w") as f:
+        json.dump(mod,f,indent=4)
+        
+        
+
 
 #UTILITY
-@client.command(pass_context=True)
-async def nickname(ctx, member: discord.User=None, *, newnick=None):
-    author = ctx.message.author
-    try:
-        if ctx.message.author.server_permissions.manage_nicknames:
-            if member is None:
-                embed = discord.Embed(color=0xff0200)
-                embed.add_field(name=':x: Error:', value='```Please specify a user!```', inline=False)
-                embed.set_footer(icon_url=author.avatar_url, text="| Utility commands!")
-                await client.say(embed=embed)
-            
-        else:
-            embed = discord.Embed(color=0xff0200)
-            embed.add_field(name=':x: Error', value='You are missing the following permission: ``Manage Nicknames``', inline=False)
-            embed.set_footer(icon_url=author.avatar_url, text='You cant use this command!')
-            await client.say(embed=embed)
-            
-        await client.change_nickname(member, newnick)
-        embed = discord.Embed(color=0x00ff00)
-        embed.add_field(name='Changed:', value=f"You have changed {member.name}'s name to `{newnick}`", inline=True)
-        embed.set_footer(icon_url=author.avatar_url, text="| Utility commands!")
-        await client.say(embed=embed) 
-            
-    except discord.Forbidden:
-        embed = discord.Embed(color=0xff0200)
-        author = ctx.message.author
-        embed.set_author(name="Something went wrong ;-;")
-        embed.add_field(name=":x: Error", value="I'm missing the following permission: ```Manage Nicknames```", inline=False)
-        embed.set_footer(icon_url=author.avatar_url, text=f"Make sure my role is higher than {author.name}, that can be another error ;-;")
-        await client.say(embed=embed)
 
 
 #MODERARION COMMANDS:
+
   
     
 client.run(os.environ.get('BOT_TOKEN'))
