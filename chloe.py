@@ -54,23 +54,6 @@ async def cooldown_error(error, ctx):
         embed.add_field(name="Slowdown :stuck_out_tongue_winking_eye: ", value=f"Cooldown: **{remainder}** \n Each Command: **5**", inline=False)
         await client.say(embed=embed)
         
-@client.command(pass_context = True)
-async def lovecalc(ctx, user1 : discord.Member. user2 : discord.Member):
-    try:
-        if user1 is None:
-            await client.say("You're lonely as fuck, you need to users to do this.")
-            
-        if user1 or user2 != discord.Member:
-            await client.say("Invalid user (ping them)")
-            
-        else:
-            loverate = random.randint(1,100)
-            overall = str(loverate)
-            await client.say(overall)
-            
-    except discord.HTTPException:
-        await client.say("oh no")
-        
 #CONFIRGURING
 @client.command(pass_context=True)
 async def setmod(ctx, *, channel_name = None):
@@ -215,7 +198,7 @@ async def crole(ctx, *, role = None):
             if role is None:
                 await client.say("Please specify a correct role.")
                 return
-            await client.create_role(server=server, role=role)
+            await client.create_roles(server=server, role=role)
             await client.say(f":white_check_mark:***Created {role}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Created Role")
@@ -245,7 +228,7 @@ async def drole(ctx, *, name = None):
             if role is None:
                 await client.say("Please specify a correct role.")
                 return
-            await client.delete_role(server=server, role=role)
+            await client.delete_roles(server=server, role=role)
             await client.say(f":white_check_mark:***Deleted {name}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Deleted Role")
