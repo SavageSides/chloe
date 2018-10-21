@@ -33,26 +33,26 @@ async def on():
     
 @client.event
 async def on_member_join(member):
-    with open("server.json", "r") as f:
+    with open("Mod-data.json", "r") as f:
         join = json.load(f)
     server = member.server
     welcomes = join[member.server.id]["welcome-message"]
     channels = join[member.server.id]["welcome-goodbye-channel"]
     channel = discord.utils.get(server.channels, name=channels)
     await client.send_message(channel, f"{member.mention}, {welcomes}")
-    with open("server.json", "w") as f:
+    with open("Mod-data.json", "w") as f:
         json.dump(join,f)
 
 @client.event
 async def on_member_remove(member):
-    with open("server.json", "r") as f:
+    with open("Mod-data.json", "r") as f:
         bye = json.load(f)
     server = member.server
     goodbyess = bye[member.server.id]["goodbye-message"]
     channels = bye[member.server.id]["welcome-goodbye-channel"]
     channel = discord.utils.get(server.channels, name=channels)
     await client.send_message(channel, f"{member.mention}, {goodbyess}")
-    with open("server.json", "w") as f:
+    with open("Mod-data.json", "w") as f:
         json.dump(bye,f)
    
 
