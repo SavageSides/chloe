@@ -143,7 +143,7 @@ async def ban(ctx, user: discord.Member = None, *, reason = None):
     with open("Mod-data.json", "w") as f:
         json.dump(kick,f)
         
- @client.command(pass_context=True)
+@client.command(pass_context=True)
 async def mute(ctx, user: discord.Member = None, *, reason = None):
     with open("Mod-data.json", "r") as f:
         mute = json.load(f)
