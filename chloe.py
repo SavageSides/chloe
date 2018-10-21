@@ -218,5 +218,36 @@ async def unmute(ctx, user: discord.Member = None):
     with open("Mod-data.json", "r") as f:
         json.dump(mute,f)
         
+@client.command(pass_context=True)
+async def purge(ctx, *, amount: int = None):
+    with open("Mod-data", "r") as f:
+        mod = json.load(f)
+    modchannel = mod[ctx.message.server.id]["mod-channel"]
+    channels = discord.utils.get(ctx.message.server.channel, name = modchannel)
+    try:
+        if ctx.message.author.server_permissions.manage_messages:
+            if amount is None:
+                await client.say("Please specify a amount you want me to clear!")
+                return
+            channel = ctx.message.channel
+            author = ctx.message.author
+            messages = []
+            async for message in client.logs_from(channel, limit=int(amount)):
+                messages.append(message)
+            await client.delete_messages(messages)
+            await client.say(f":white_check_mark:***Cleared {amount}***")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was kicked")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}**\n :thinking:\Amount:**{amount}**\n:inbox_tray:Channel:****{channel.mention}**")
+            await client.send_message(channels, embed=embed)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Manage Messages`` permissions!")
+    except discord.Forbidden:
+        await client.say("I can't clear the chat, I do not have permissions!")
+    with open("Mod-data.json", "r") as f:
+        json.dump(mod,f)
+        
+    
+        
   
 client.run(os.environ.get('BOT_TOKEN'))
