@@ -36,10 +36,13 @@ async def on_member_join(member):
     with open("Mod-data.json", "r") as f:
         join = json.load(f)
     server = member.server
+    joinrole = mod[ctx.message.server.id]["autorole"] = mute_role
+    joined = discord.utils.get(ctx.message.server.roles, name = joinrole)
     welcomes = join[member.server.id]["welcome-message"]
     channels = join[member.server.id]["welcome-goodbye-channel"]
     channel = discord.utils.get(server.channels, name=channels)
     await client.send_message(channel, f"{member.mention}, {welcomes}")
+    await client.add_roles(member, joined)
     with open("Mod-data.json", "w") as f:
         json.dump(join,f)
 
@@ -177,6 +180,27 @@ async def setmute(ctx, *, mute_role = None):
             mod[ctx.message.server.id] = {}
             mod[ctx.message.server.id]["mute-role"] = "defualt"
         mod[ctx.message.server.id]["mute-role"] = mute_role
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+        embed.add_field(name=":white_check_mark: Muted Role set to", value=f"***{mute_role}***", inline=False)
+        await client.say(embed=embed)
+    else:
+        await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
+    with open("Mod-data.json", "w") as f:
+        json.dump(mod,f,indent=4)
+        
+@client.command(pass_context=True)
+async def autorole(ctx, *, mute_role = None):
+    with open("Mod-data.json", "r") as f:
+        mod = json.load(f)
+    joinrole = discord.utils.get(ctx.message.server.roles, name = mute_role)
+    if ctx.message.author.server_permissions.manage_server:
+        if joinrole is None:
+            await client.say("Please say a correct role.")
+            return
+        if not ctx.message.server.id in mod:
+            mod[ctx.message.server.id] = {}
+            mod[ctx.message.server.id]["autorole"] = "defualt"
+        mod[ctx.message.server.id]["autorole"] = mute_role
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
         embed.add_field(name=":white_check_mark: Muted Role set to", value=f"***{mute_role}***", inline=False)
         await client.say(embed=embed)
