@@ -29,48 +29,7 @@ async def eightball(ctx, *, question):
     embed.add_field(name= "**"+question+"**", value = choice, inline = False)
     embed.set_footer(icon_url=author.avatar_url, text="Fun Commands!")
     await client.say(embed=embed)
-    return     
-
-@client.command(pass_context=True)
-async def hug(ctx, user: discord.Member = None):
-    if ctx.message.author.bot:
-        await client.say("Bots can't use commands.")
-        return
-    if user is None:
-        await client.say("Specify a user please.")
-        return
-    response = requests.get("https://nekos.life/api/v2/img/hug")
-    data = response.json()
-    data = response.json()
-    embed = discord.Embed(title=f"Hugged {user.name}", color=0x08202D)
-    embed.set_image(url=f"{data['url']}")
-    embed.set_footer(text=f"Requested By: {ctx.message.author}")
-    await client.say(embed=embed)
-
-
-
-@client.command(pass_context=True)
-async def shibe(ctx):
-    if ctx.message.author.bot:
-        await client.say("Bots can't use commands.")
-        return
-    request = requests.get('http://shibe.online/api/shibes')
-    link = request.json()[0]
-    embed = discord.Embed(title='Shibe', color=0x08202D)
-    embed.set_image(url=link)
-    embed.set_footer(text=f"Requested By: {ctx.message.author}")
-    await client.say(embed=embed)
-
-@client.command(pass_context=True)
-async def bird(ctx):
-    if ctx.message.author.bot:
-        await client.say("Bots can't use commands.")
-        return
-    response = requests.get('https://some-random-api.ml/birbimg')
-    data = response.json()
-    embed = discord.Embed(color=0x08202D)
-    embed.set_image(url=f"{data['link']}")
-    await client.say(embed=embed)
+    return    
     
 @client.command(pass_context = True)
 @commands.cooldown(5, 10, commands.BucketType.user)
@@ -166,6 +125,26 @@ async def setgoodbye(ctx, *, text = None):
             welcome[ctx.message.server.id] = {}
             welcome[ctx.message.server.id]["goodbye-message"] = "default"
         welcome[ctx.message.server.id]["goodbye-message"] = text
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+        embed.add_field(name=":white_check_mark: Set goodbye to:", value=f"*{text}*", inline=True)
+        await client.say(embed=embed)
+    else:
+        await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
+    with open("Mod-data.json", "w") as f:
+        json.dump(welcome,f,indent=4)
+        
+@client.command(pass_context=True)
+async def setchannel(ctx, *, text = None):
+    with open("Mod-data.json", "r") as f:
+        welcome = json.load(f)
+    if ctx.message.author.server_permissions.manage_server:
+        if text is None:
+            await client.say("Please specify a channel  for me to set!")
+            return
+        if not ctx.message.server.id in welcome :
+            welcome[ctx.message.server.id] = {}
+            welcome[ctx.message.server.id]["welcome-goodbye-channel] = "defualt"
+        welcome[ctx.message.server.id]["welcome-goodbye-channel] = text
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
         embed.add_field(name=":white_check_mark: Set goodbye to:", value=f"*{text}*", inline=True)
         await client.say(embed=embed)
