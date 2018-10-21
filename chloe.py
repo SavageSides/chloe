@@ -174,5 +174,36 @@ async def mute(ctx, user: discord.Member = None, *, reason = None):
     with open("Mod-data.json", "r") as f:
         json.dump(mute,f)
         
+@client.command(pass_context=True)
+async def unmute(ctx, user: discord.Member = None):
+    with open("Mod-data.json", "r") as f:
+        mute = json.load(f)
+    author = ctx.message.author
+    role = mute[ctx.message.server.id]["mute-role"]
+    MutedRole = discord.utils.get(ctx.message.server.roles, name = role)
+    modchannel = mute[ctx.message.server.id]["mod-channel"]
+    channels = discord.utils.get(ctx.message.server.channels, name = modchannel)
+    try:
+        if ctx.message.author.server_permissions.mute_members:
+            if MutedRole is None:
+                await client.say("Please set a muted role! ``?setmute <role>``")
+                return
+            if user is None:
+                await client.say("Please specify a user for me to mute!")
+                return
+            await client.remove_roles(user, MutedRole)
+            await client.send_message(user, f"You were unmuted in **{ctx.message.server.name}** for the reason of: **{reason}**")
+            await client.say(f":white_check_mark:***Unmuted {user.mention}***")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was unmuted")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :thinking:Role:**{MutedRole}**")
+            await client.send_message(channels, embed=embed)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Mute Members`` permissions!")
+    except discord.Forbidden:
+        await client.say("I can't remove the muted role to the user I do not have permissions!")
+    with open("Mod-data.json", "r") as f:
+        json.dump(mute,f)
+        
   
 client.run(os.environ.get('BOT_TOKEN'))
