@@ -15,7 +15,7 @@ async def on():
 
 #FUN COMMANDS:
 @client.command(pass_context = True)
-@commands.cooldown(5, 10, commands.BucketType.user)
+@commands.cooldown(1, 10, commands.BucketType.user)
 async def meme(ctx):
     async with aiohttp.ClientSession() as cs:
         async with cs.get("https://api.reddit.com/r/me_irl/random") as r:
