@@ -140,15 +140,15 @@ async def setgoodbye(ctx, *, text = None):
 async def avatar(ctx, user: discord.Member = None):
     await client.send_typing(ctx.message.channel)
     if user is None:
-        embed = discord.Embed(title="{}'s Avatar:".format(ctx.message.author.name), color=0x00ff00)
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+        embed.add_field(name=f"**{ctx.message.author.name}'s** Avatar", value="[Link](ctx.message.author_url", inline=False)
         embed.set_image(url=ctx.message.author.avatar_url)
-        embed.add_field(name="Link: ", value=ctx.message.author.avatar_url, inline=True)
         await client.say(embed=embed)
 
     else:
-        embed = discord.Embed(title="{}'s Avatar:".format(user.name), color=0x00ff00)
-        embed.set_image(url=user.avatar_url)
-        embed.add_field(name="Link: ", value=user.avatar_url, inline=True)
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+        embed.add_field(name=f"**{user.name}'s** Avatar", value="[Link](user.avatar_url)", inline=True)
+        embed.set_image(url=ctx.message.author.avatar_url)
         await client.say(embed=embed)
 
 
