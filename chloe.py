@@ -21,7 +21,7 @@ async def on():
 
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
-async def eightball(ctx, question):
+async def eightball(ctx, *, question):
     author = ctx.message.author
     pick = ['Yes','No', 'Ask again']
     choice = random.choice(pick)
