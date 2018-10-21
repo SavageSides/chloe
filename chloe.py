@@ -333,7 +333,7 @@ async def rolecolor(ctx, colour : discord.Colour = None, *, name = None):
             await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
     except discord.Forbidden:
         await client.say("I need manage roles permissions.")
-     with open("Mod-data.json", "w") as f:
+    with open("Mod-data.json", "w") as f:
         json.dump(mod,f)
 
 @client.command(pass_context=True)
