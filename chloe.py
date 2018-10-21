@@ -57,7 +57,8 @@ async def cooldown_error(error, ctx):
 @client.command(pass_context = True)
 async def rate(ctx):
     rating = random.randint(1,100)
-    await client.say("Your rating is " + rating + "%")
+    ratings = str(rating)
+    await client.say("Your rating is " + ratings + "%")
 
 #CONFIRGURING
 @client.command(pass_context=True)
