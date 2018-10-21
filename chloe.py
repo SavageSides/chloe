@@ -245,7 +245,7 @@ async def purge(ctx, *, amount: int = None):
             await client.say(f":white_check_mark:***Cleared {amount}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
             embed.set_author(icon_url=author.avatar_url, name=f"Chat Was Cleared")
-            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}**\n :thinking:\Amount:**{amount}**\n:inbox_tray:Channel:****{channel.mention}**")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}**\n :thinking:Amount:**{amount}**\n:inbox_tray:Channel:**{channel.mention}**")
             await client.send_message(channels, embed=embed)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Manage Messages`` permissions!")
