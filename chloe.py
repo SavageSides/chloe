@@ -1,10 +1,9 @@
-
-
 import discord
 from discord.ext import commands
 import aiohttp
 import random
 import json
+import magic_py_ball
 import asyncio
 import time
 import os
