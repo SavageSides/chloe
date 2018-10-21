@@ -36,7 +36,7 @@ async def on_member_join(member):
     with open("Mod-data.json", "r") as f:
         join = json.load(f)
     server = member.server
-    joinrole = mod[ctx.message.server.id]["autorole"] = mute_role
+    joinrole = mod[ctx.message.server.id]["autorole"]
     joined = discord.utils.get(ctx.message.server.roles, name = joinrole)
     welcomes = join[member.server.id]["welcome-message"]
     channels = join[member.server.id]["welcome-goodbye-channel"]
