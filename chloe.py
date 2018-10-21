@@ -53,7 +53,12 @@ async def cooldown_error(error, ctx):
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
         embed.add_field(name="Slowdown :stuck_out_tongue_winking_eye: ", value=f"Cooldown: **{remainder}** \n Each Command: **5**", inline=False)
         await client.say(embed=embed)
-        
+ 
+@client.command(pass_context = True)
+async def rate(ctx):
+    rating = random.randint(1,100)
+    await client.say("Your rating is " + rating + "%")
+
 #CONFIRGURING
 @client.command(pass_context=True)
 async def setmod(ctx, *, channel_name = None):
