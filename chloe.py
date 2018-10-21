@@ -99,6 +99,9 @@ async def kick(ctx, user: discord.Member = None, *, reason = None):
     channels = discord.utils.get(ctx.message.server.channels, name = channel)
     try:
         if ctx.message.author.server_permissions.kick_members:
+            if author == user:
+                await client.say("You can't kick your self!")
+                return
             if user is None:
                 await client.say("Please specify a user for me to kick!")
                 return
@@ -126,6 +129,9 @@ async def ban(ctx, user: discord.Member = None, *, reason = None):
     channels = discord.utils.get(ctx.message.server.channels, name = channel)
     try:
         if ctx.message.author.server_permissions.ban_members:
+            if author == user:
+                await client.say("You can't ban your self!")
+                return
             if user is None:
                 await client.say("Please specify a user for me to ban!")
                 return
@@ -154,6 +160,9 @@ async def mute(ctx, user: discord.Member = None, *, reason = None):
     channels = discord.utils.get(ctx.message.server.channels, name = modchannel)
     try:
         if ctx.message.author.server_permissions.mute_members:
+            if author == user:
+                await client.say("You can't unmute your self!")
+                return
             if MutedRole is None:
                 await client.say("Please set a muted role! ``?setmute <role>``")
                 return
@@ -185,6 +194,9 @@ async def unmute(ctx, user: discord.Member = None):
     channels = discord.utils.get(ctx.message.server.channels, name = modchannel)
     try:
         if ctx.message.author.server_permissions.mute_members:
+            if author == user:
+                await client.say("You can't unmute your self!")
+                return
             if MutedRole is None:
                 await client.say("Please set a muted role! ``?setmute <role>``")
                 return
@@ -192,7 +204,7 @@ async def unmute(ctx, user: discord.Member = None):
                 await client.say("Please specify a user for me to mute!")
                 return
             await client.remove_roles(user, MutedRole)
-            await client.send_message(user, f"You were unmuted in **{ctx.message.server.name}** for the reason of: **{reason}**")
+            await client.send_message(user, f"You were unmuted in **{ctx.message.server.name}**")
             await client.say(f":white_check_mark:***Unmuted {user.mention}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
             embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was unmuted")
