@@ -25,7 +25,7 @@ async def eightball(ctx, question):
     pick = ['Yes','No', 'Ask again']
     choice = random.choice(pick)
     embed = discord.Embed(color = 0x00ff00)
-    embed.add_field(name= question, value = choice, inline = False)
+    embed.add_field(name= "**" +question+"**", value = choice, inline = False)
     await client.say(embed=embed)
     return     
 
