@@ -7,6 +7,7 @@ import magic_py_ball
 import datetime
 import asyncio
 import time
+import requests
 import os
 
 client = commands.Bot(command_prefix="?")
