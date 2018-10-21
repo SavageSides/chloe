@@ -194,7 +194,7 @@ async def crole(ctx, *, role = None):
             if role is None:
                 await client.say("Please specify a correct role.")
                 return
-            await client.say(f":white_check_mark:***Deleted {name}***")
+            await client.say(f":white_check_mark:***Created {role}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=user.avatar_url, name=f"Created Role")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{role}")
