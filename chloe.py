@@ -52,11 +52,6 @@ async def cooldown_error(error, ctx):
         embed.add_field(name="Slowdown :stuck_out_tongue_winking_eye: ", value=f"Cooldown: **{remainder}** \n Each Command: **5**", inline=False)
         await client.say(embed=embed)
         
-@client.command(pass_context=True)
-async def rate(ctx, user : discord.Member):
-    result = random.randint(1,100)
-    await client.say(result)
-        
 #CONFIRGURING
 @client.command(pass_context=True)
 async def setmod(ctx, *, channel_name = None):
@@ -148,7 +143,7 @@ async def setchannel(ctx, *, text = None):
             return
         if not ctx.message.server.id in welcome :
             welcome[ctx.message.server.id] = {}
-            welcome[ctx.message.server.id]["welcome-goodbye-channel] = "defualt"
+            welcome[ctx.message.server.id][welcome-goodbye-channel] = "defualt"
         welcome[ctx.message.server.id]["welcome-goodbye-channel] = text
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
         embed.add_field(name=":white_check_mark: Set goodbye to:", value=f"*{text}*", inline=True)
