@@ -24,6 +24,7 @@ async def on():
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
 async def eightball(ctx, *, question):
+    author = ctx.message.author
     choice = ['Yes', 'No', 'Better not tell you now']
     embed = discord.Embed(color = 0x00ff00)
     embed.add_field(name= "**"+question+"**", value = choice, inline = False)
