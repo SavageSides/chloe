@@ -37,7 +37,7 @@ async def on_member_join(member):
         join = json.load(f)
     server = member.server
     joinrole = join[member.server.id]["autorole"]
-    joined = discord.utils.get(ctx.message.server.roles, name = joinrole)
+    joined = discord.utils.get(member.server.roles, name = joinrole)
     welcomes = join[member.server.id]["welcome-message"]
     channels = join[member.server.id]["welcome-goodbye-channel"]
     channel = discord.utils.get(server.channels, name=channels)
