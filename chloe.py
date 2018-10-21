@@ -198,7 +198,7 @@ async def crole(ctx, *, role = None):
             if role is None:
                 await client.say("Please specify a correct role.")
                 return
-            await client.create_roles(server=server, role=role)
+            await client.create_role(server=server, role=role)
             await client.say(f":white_check_mark:***Created {role}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Created Role")
@@ -228,7 +228,7 @@ async def drole(ctx, *, name = None):
             if role is None:
                 await client.say("Please specify a correct role.")
                 return
-            await client.delete_roles(server=server, role=role)
+            await client.delete_role(server=server, role=role)
             await client.say(f":white_check_mark:***Deleted {name}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Deleted Role")
