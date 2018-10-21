@@ -19,7 +19,7 @@ async def on():
 
 #FUN COMMANDS:
 @client.command(pass_context = True)
-@commands.cooldown(1, 10, commands.BucketType.user)
+@commands.cooldown(5, 10, commands.BucketType.user)
 async def meme(ctx):
     async with aiohttp.ClientSession() as cs:
         async with cs.get("https://api.reddit.com/r/me_irl/random") as r:
@@ -36,7 +36,7 @@ async def cooldown_error(error, ctx):
     if isinstance(error, commands.CommandOnCooldown):
         remainder = divmod(error.retry_after, 10)
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-        embed.add_field(name="Slowdown :stuck_out_tongue_winking_eye: ", value=f"Cooldown: **{remainder}** \n Each Command: **1**", inline=False)
+        embed.add_field(name="Slowdown :stuck_out_tongue_winking_eye: ", value=f"Cooldown: **{remainder}** \n Each Command: **5**", inline=False)
         await client.say(embed=embed)
         
 #CONFIRGURING
