@@ -1,6 +1,4 @@
-@client.event
-async def on_ready():
-    print("Chloes Ready")
+
 
 import discord
 from discord.ext import commands
