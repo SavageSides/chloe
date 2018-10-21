@@ -1,3 +1,7 @@
+@client.event
+async def on_ready():
+    print("Chloes Ready")
+
 import discord
 from discord.ext import commands
 import aiohttp
@@ -94,6 +98,7 @@ async def kick(ctx, user: discord.Member = None, *, reason = None):
     server = ctx.message.server
     author = ctx.message.author
     channel = kick[ctx.message.server.id]["mod-channel"]
+    channels = discord.utils.get(ctx.message.server.channels, name = channel)
     try:
         if ctx.message.author.server_permissions.kick_members:
             if user is None:
@@ -103,19 +108,13 @@ async def kick(ctx, user: discord.Member = None, *, reason = None):
             await client.kick(user)
             await client.say(f":white_check_mark:***Kicked {user.mention}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-            embed.set_author(icon_url=user.avatar_url, name="{user.name} was kicked")
-            embed.add_field(name="Information", value=":tools:Moderator: **{author.name}*** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}")
-            embed.send_message(channel, embed=embed)
+            embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was kicked")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}**")
+            await client.send_message(channels, embed=embed)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Kick Members`` permissions!")
     except discord.Forbidden:
         await client.say("Looks like I can't kick this member! Check my permissions.")
     with open("Mod-data.json", "w") as f:
-        json.dump(mod,f)
-
-    
- 
-    
-    
-    
+        json.dump(kick,f)
 client.run(os.environ.get('BOT_TOKEN'))
