@@ -826,7 +826,141 @@ async def bal(ctx, user: discord.Member = None):
     await client.say(embed=embed)
 
 
+#Action Commands
 
+@client.command(pass_context=True)
+async def cat(ctx):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    response = requests.get('https://aws.random.cat/meow')
+    data = response.json()
+    embed = discord.Embed(title= "Cute Cat!", color=0x08202D)
+    embed.set_image(url=f"{data['file']}")
+    embed.set_footer(text=f"Requested By: {ctx.message.author}")
+    await client.say(embed=embed)
+
+@client.command(pass_context=True)
+async def dog(ctx):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    response = requests.get('https://random.dog/woof.json')
+    data = response.json()
+    embed = discord.Embed(title="Cute Doggys!", color=0x08202D)
+    embed.set_image(url=f"{data['url']}")
+    embed.set_footer(text=f"Requested By: {ctx.message.author}")
+    await client.say(embed=embed)
+
+
+@client.command(pass_context=True)
+async def kiss(ctx, user: discord.Member = None):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    if user is None:
+        await client.say("Specify a user please.")
+        return
+    response = requests.get("https://nekos.life/api/v2/img/kiss")
+    data = response.json()
+    data = response.json()
+    embed = discord.Embed(title=f"Kiss {user.name}", color=0x08202D)
+    embed.set_image(url=f"{data['url']}")
+    embed.set_footer(text=f"Requested By: {ctx.message.author}")
+    await client.say(embed=embed)
+
+    
+@client.command(pass_context=True)
+async def cuddle(ctx, user: discord.Member = None):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    if user is None:
+        await client.say("Specify a user please.")
+        return
+    response = requests.get("https://nekos.life/api/v2/img/cuddle")
+    data = response.json()
+    data = response.json()
+    embed = discord.Embed(title=f"Cuddle {user.name}", color=0x08202D)
+    embed.set_image(url=f"{data['url']}")
+    embed.set_footer(text=f"Requested By: {ctx.message.author}")
+    await client.say(embed=embed)
+
+@client.command(pass_context=True)
+async def slap(ctx, user: discord.Member = None):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    if user is None:
+        await client.say("Specify a user please.")
+        return
+    response = requests.get("https://nekos.life/api/v2/img/slap")
+    data = response.json()
+    data = response.json()
+    embed = discord.Embed(title=f"Slapped The Fuck Out Of {user.name}", color=0x08202D)
+    embed.set_image(url=f"{data['url']}")
+    embed.set_footer(text=f"Requested By: {ctx.message.author}")
+    await client.say(embed=embed)
+
+@client.command(pass_context=True)
+async def hug(ctx, user: discord.Member = None):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    if user is None:
+        await client.say("Specify a user please.")
+        return
+    response = requests.get("https://nekos.life/api/v2/img/hug")
+    data = response.json()
+    data = response.json()
+    embed = discord.Embed(title=f"Hugged {user.name}", color=0x08202D)
+    embed.set_image(url=f"{data['url']}")
+    embed.set_footer(text=f"Requested By: {ctx.message.author}")
+    await client.say(embed=embed)
+
+
+
+@client.command(pass_context=True)
+async def shibe(ctx):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    request = requests.get('http://shibe.online/api/shibes')
+    link = request.json()[0]
+    embed = discord.Embed(title='Shibe', color=0x08202D)
+    embed.set_image(url=link)
+    embed.set_footer(text=f"Requested By: {ctx.message.author}")
+    await client.say(embed=embed)
+
+@client.command(pass_context=True)
+async def bird(ctx):
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    response = requests.get('https://some-random-api.ml/birbimg')
+    data = response.json()
+    embed = discord.Embed(color=0x08202D)
+    embed.set_image(url=f"{data['link']}")
+    await client.say(embed=embed)
+
+@client.command(pass_context=True)
+async def duck(ctx, module="img"):
+    module = module.lower()
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    if module == "gif":
+        response = requests.get('https://random-d.uk/api/v1/random?type=gif')
+        data = response.json()
+        embed = discord.Embed(color=0x08202D)
+        embed.set_image(url=f"{data['url']}")
+        await client.say(embed=embed)
+    if module == "img":
+        response = requests.get('https://random-d.uk/api/v1/random?type=jpg')
+        data = response.json()
+        embed = discord.Embed(color=0x08202D)
+        embed.set_image(url=f"{data['url']}")
+        await client.say(embed=embed)
         
     
         
