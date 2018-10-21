@@ -71,7 +71,11 @@ async def setmod(ctx, *, channel_name = None):
         json.dump(mod,f,indent=4)
         
         
-
+#@client.command(pass_context = True)
+#async def setwelcomechannel(ctx, welcomechannel = None):
+    #if ctx.message.author.server_permissions.manage.server:
+        #with open("welcomeleave.json", "r") as f:
+        #channel = json.load(f)
 
 #UTILITY
 
