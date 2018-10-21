@@ -101,7 +101,7 @@ async def kick(ctx, user: discord.Member = None, *, reason = None):
             if user is None:
                 await client.say("Please specify a user for me to kick!")
                 return
-            await client.send_message(user, f"You were kicked from **{server.name}** for the reason of: **{reason}**", inline=False)
+            await client.send_message(user, f"You were kicked from **{server.name}** for the reason of: **{reason}**")
             await client.kick(user)
             await client.say(":white_check_mark: ***Kicked {user.mention}**")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
