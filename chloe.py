@@ -20,6 +20,19 @@ async def on():
     await client.say("I am online on heroku! Wrong, and Savage")
 
 #FUN COMMANDS:
+@client.event
+async def on_message(message):
+    if message.content.startswith("?8ball"):
+        choices = ["Yes",
+                   "No",
+                   "Ask again"]
+        selected = random.choice(choices)
+        embed = discord.Embed(color = 0x00ff00)
+        embed.add_field(name = "8ball:", value = selected, inline = False)
+        await client.send_messages(message.channel, embed=embed)
+    
+    await client.process_commands(message)   
+
 @client.command(pass_context = True)
 @commands.cooldown(5, 10, commands.BucketType.user)
 async def meme(ctx):
