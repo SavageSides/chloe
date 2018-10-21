@@ -66,7 +66,7 @@ async def setmod(ctx, *, channel_name = None):
         embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{no-channel}***", inline=False)
         await client.say(embed=embed)
    else:  
-    await client.say("{ctx.message.author.mention} you don't have permissions for this! Permission: ``Manage Server``")
+        await client.say("{ctx.message.author.mention} you don't have permissions for this! Permission: ``Manage Server``")
    with open("Mod-data.json", "w") as f:
         json.dump(mod,f,indent=4)
         
