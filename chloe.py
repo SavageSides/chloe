@@ -101,8 +101,8 @@ async def setwelcome(ctx, *, welcome = None):
             return
         if not ctx.message.server.id in welcome :
             welcome[ctx.message.server.id] = {}
-            welcome[ctx.message.server.id]["welcome"] = "default"
-        welcome[ctx.message.server.id]["welcome"] = text
+            welcome[ctx.message.server.id]["welcome-message"] = "default"
+        welcome[ctx.message.server.id]["welcome-message"] = welcome
         embed = discord.Embed(color=0x4e09ff)
         embed.add_field(name=":white_check_mark: Set welcome to:", value=f"*{welcome}*", inline=True)
         await client.say(embed=embed)
