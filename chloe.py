@@ -156,6 +156,9 @@ async def mute(ctx, user: discord.Member = None, *, reason = None):
             if MutedRole is None:
                 await client.say("Please set a muted role! ``?setmute <role>``")
                 return
+            if user is None:
+                await client.say("Please specify a user for me to mute!")
+                return
             await client.add_role(user, MutedRole)
             await client.send_message(user, f"You were muted in **{ctx.message.server.name}** for the reason of: **{reason}**")
             await client.say(":white_check_mark:***Muted {user.mention}***")
