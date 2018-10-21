@@ -73,7 +73,7 @@ async def setmute(ctx, *, mute_role = None):
             mod[ctx.message.server.id]["mute-role"] = "defualt"
         mod[ctx.message.server.id]["mute-role"] = mute_role
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-        embed.add_field(name=":white_check_mark: Muted Role set to", value=f"***mute_role}***", inline=False)
+        embed.add_field(name=":white_check_mark: Muted Role set to", value=f"***{mute_role}***", inline=False)
         await client.say(embed=embed)
     else:
         await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
