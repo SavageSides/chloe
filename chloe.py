@@ -22,9 +22,7 @@ async def on():
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
 async def eightball(ctx, *, question):
-    author = ctx.message.author
-    pick = ['Yes','No', 'Ask again']
-    choice = random.choice(pick)
+    choice = magic_py_ball.answer(question)
     embed = discord.Embed(color = 0x00ff00)
     embed.add_field(name= "**" +question+"**", value = choice, inline = False)
     embed.set_footer(icon_url=author.avatar_url, text="Fun Commands!")
@@ -92,6 +90,26 @@ async def setmute(ctx, *, mute_role = None):
         await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
     with open("Mod-data.json", "w") as f:
         json.dump(mod,f,indent=4)
+        
+@client.command(pass_context=True)
+async def setwelcome(ctx, *, welcome = None):
+    with open("Mod-data.json", "r") as f:
+        welcome = json.load(f)
+    if ctx.message.author.server_permissions.manage_server:
+        if welcome is None:
+            await client.say("Please specify a welcome message for me to set!")
+            return
+        if not ctx.message.server.id in welcome :
+            welcome[ctx.message.server.id] = {}
+            welcome[ctx.message.server.id]["welcome"] = "default"
+        welcome[ctx.message.server.id]["welcome"] = text
+        embed = discord.Embed(color=0x4e09ff)
+        embed.add_field(name=":white_check_mark: Set welcome to:", value=f"*{welcome}*", inline=True)
+        await client.say(embed=embed)
+    else:
+        await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
+    with open("Mod-data.json", "w") as f:
+        json.dump(welcome,f,indent=4)
         
         
 
