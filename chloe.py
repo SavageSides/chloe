@@ -78,7 +78,7 @@ async def setmod(ctx, *, channel_name = None):
 async def setmute(ctx, *, mute_role = None):
     with open("Mod-data.json", "r") as f:
         mod = json.load(f)
-    Mutrole = discord.utils.get(ctx.message.server.roles, name = mute_role)
+    Muterole = discord.utils.get(ctx.message.server.roles, name = mute_role)
     if ctx.message.author.server_permissions.manage_server:
         if Muterole is None:
             await client.say("Please say a correct role.")
