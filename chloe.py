@@ -74,10 +74,6 @@ async def nickname(ctx, member: discord.User=None, *, newnick=None):
         embed.set_footer(icon_url=author.avatar_url, text=f"Make sure my role is higher than {author.name}, that can be another error ;-;")
         await client.say(embed=embed)
 
-    except discord.HTTPException:
-        embed = discord.Embed(color=0xff0200)
-        embed.add_field(name=":x: Error", value="Sorry, I can't nickname other bots at the moment ;-;")
-        await client.say(embed=embed)    
 
 #MODERARION COMMANDS:
   
