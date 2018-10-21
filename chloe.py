@@ -54,6 +54,23 @@ async def cooldown_error(error, ctx):
         embed.add_field(name="Slowdown :stuck_out_tongue_winking_eye: ", value=f"Cooldown: **{remainder}** \n Each Command: **5**", inline=False)
         await client.say(embed=embed)
         
+@client.command(pass_context = True)
+async def lovecalc(ctx, user1 : discord.Member. user2 : discord.Member):
+    try:
+        if user1 is None:
+            await client.say("You're lonely as fuck, you need to users to do this.")
+            
+        if user1 or user2 != discord.Member:
+            await client.say("Invalid user (ping them)")
+            
+        else:
+            loverate = random.randint(1,100)
+            overall = str(loverate)
+            await client.say(overall)
+            
+    except discord.HTTPException:
+        await client.say("oh no")
+        
 #CONFIRGURING
 @client.command(pass_context=True)
 async def setmod(ctx, *, channel_name = None):
