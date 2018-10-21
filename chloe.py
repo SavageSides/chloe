@@ -208,7 +208,7 @@ async def crole(ctx, *, role = None):
             await client.say(f":white_check_mark:***Created {role}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Created Role")
-            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{role}")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{role}**")
             await client.send_message(channels, embed=embed)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
