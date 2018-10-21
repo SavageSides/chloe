@@ -24,7 +24,7 @@ async def on():
 async def eightball(ctx, *, question):
     choice = magic_py_ball.answer(question)
     embed = discord.Embed(color = 0x00ff00)
-    embed.add_field(name= "**" +question+"**", value = choice, inline = False)
+    embed.add_field(name= "**"+question+"**", value = choice, inline = False)
     embed.set_footer(icon_url=author.avatar_url, text="Fun Commands!")
     await client.say(embed=embed)
     return     
@@ -103,7 +103,7 @@ async def setwelcome(ctx, *, text = None):
             welcome[ctx.message.server.id] = {}
             welcome[ctx.message.server.id]["welcome-message"] = "default"
         welcome[ctx.message.server.id]["welcome-message"] = text
-        embed = discord.Embed(color=0x4e09ff)
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
         embed.add_field(name=":white_check_mark: Set welcome to:", value=f"*{text}*", inline=True)
         await client.say(embed=embed)
     else:
