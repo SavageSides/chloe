@@ -20,6 +20,20 @@ async def on_ready():
 @client.command()
 async def on():
     await client.say("I am online on heroku! Wrong, and Savage")
+    
+@client.command(pass_context=True)
+async def help(ctx):
+    embed = discord.Embed(color=(random.randint(0, 0xfffff)))
+    embed.add_field(name="Help", value="If you need help controling me join the [support server](https://discord.gg/EGetAqk)")
+    embed.add_field(name="Fun Commands", value="``?rate`` ``?meme`` ?8ball`` ``?on``", inline=False)
+    embed.add_field(name="Config Commands", value="``?setmod`` ``?setmute`` ``?setwelcome`` ``?setgoodbye`` ``?setchannel``", inline=False)
+    embed.add_field(name="Utility Commands", value="``?serverinfo`` ``?userinfo`` ``?avatar``", inline=False)
+    embed.add_field(name="Roleplay Commands", value="``?crole`` ``?drole`` ``?addrole`` ``?removerole`` ``?rolecolor``", inline=False)
+    embed.add_field(name="Moderation Commands", value="``?kick`` ``?ban`` ``?mute`` ``?unmute`` ``?purge``", inline=False)
+    embed.add_field(name="Currency Commands", value="``?addmoney`` ``?removemoney`` ``?work`` ``?daily`` ``?slots`` ``?givemoney`` ``?crate`` ``?crates`` ``?bal``", inline=False)
+    embed.add_field(name="Image Commands", value="``?dog`` ``?cat`` ``?shibe`` ``?duck`` ``?bird``", inline=False)
+    embed.add_field(name="Neko Commands", value="``?slap`` ``?hug`` ``?cuddle`` ``?kiss``", inline=False)
+    await client.say(embed=embed)
 
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
@@ -961,6 +975,8 @@ async def duck(ctx, module="img"):
         embed = discord.Embed(color=0x08202D)
         embed.set_image(url=f"{data['url']}")
         await client.say(embed=embed)
+                        
+                        
         
     
         
