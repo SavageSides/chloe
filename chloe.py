@@ -24,7 +24,7 @@ async def on():
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
 async def eightball(ctx, *, question):
-    choice = magic_py_ball.answer(question)
+    choice = ['Yes', 'No', 'Better not tell you now']
     embed = discord.Embed(color = 0x00ff00)
     embed.add_field(name= "**"+question+"**", value = choice, inline = False)
     embed.set_footer(icon_url=author.avatar_url, text="Fun Commands!")
