@@ -137,9 +137,10 @@ async def setgoodbye(ctx, *, text = None):
 async def setchannel(ctx, *, text = None):
     with open("Mod-data.json", "r") as f:
         welcome = json.load(f)
+    channel = discord.utils.get(ctx.message.server.channels, name = text)
     if ctx.message.author.server_permissions.manage_server:
-        if text is None:
-            await client.say("Please specify a channel  for me to set!")
+        if channel is None:
+            await client.say("Please say a correct channel.")
             return
         if not ctx.message.server.id in welcome :
             welcome[ctx.message.server.id] = {}
