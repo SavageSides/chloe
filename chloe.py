@@ -15,8 +15,17 @@ client = commands.Bot(command_prefix="?")
 client.remove_command('help')
 
 @client.event
+async def on_server_join(server):
+    await client.change_presence(game=discord.Game(name=f"{len(client.servers)}(s)", type=3))
+
+@client.event
+async def on_server_remove(server):
+    await client.change_presence(game=discord.Game(name=f"{len(client.servers)}(s)", type=3))
+
+@client.event
 async def on_ready():
     print("Chloes Ready")
+    await client.change_presence(game=discord.Game(name=f"{len(client.servers)}(s)", type=3))
     
 @client.command()
 async def on():
@@ -25,7 +34,7 @@ async def on():
 @client.command(pass_context=True)
 async def help(ctx):
     embed = discord.Embed(color=(random.randint(0, 0xfffff)))
-    embed.add_field(name="Help", value="If you need help controling me join the [support server](https://discord.gg/EGetAqk)")
+    embed.add_field(name="Help", value="If you need help controling me join the [support server](https://discord.gg/V3TG65a)")
     embed.add_field(name="Fun Commands", value="``?rate`` ``?meme`` ``?8ball`` ``?on``", inline=False)
     embed.add_field(name="Config Commands", value="``?setmod`` ``?setmute`` ``?setwelcome`` ``?setgoodbye`` ``?setchannel``", inline=False)
     embed.add_field(name="Utility Commands", value="``?serverinfo`` ``?userinfo`` ``?avatar``", inline=False)
