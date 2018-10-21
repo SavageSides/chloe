@@ -142,13 +142,13 @@ async def avatar(ctx, user: discord.Member = None):
     await client.send_typing(ctx.message.channel)
     if user is None:
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-        embed.add_field(name=f"**{ctx.message.author.name}'s** Avatar", value="[Link](author.avatar.url)", inline=False)
+        embed.add_field(name=f"**{ctx.message.author.name}'s** Avatar", value="Avatar's!", inline=False)
         embed.set_image(url=author.avatar_url)
         await client.say(embed=embed)
 
     else:
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-        embed.add_field(name=f"**{user.name}'s** Avatar", value="[Link](user.avatar.url)", inline=True)
+        embed.add_field(name=f"**{user.name}'s** Avatar", value="Avatar's!", inline=True)
         embed.set_image(url=user.avatar_url)
         await client.say(embed=embed)
 
