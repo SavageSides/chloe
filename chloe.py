@@ -87,9 +87,35 @@ async def setmute(ctx, *, mute_role = None):
 
 #MODERARION COMMANDS:
 
-@client.event
-async def on_message_delete(message):
-    await client.say("hi")
+@client.command(pass_context=True)
+async def kick(ctx, user: discord.Member = None, *, reason = None):
+    with open("Mod-data.json", "r") as f:
+        kick = json.load(f)
+    server = ctx.message.server
+    author = ctx.message.author
+    channel = kick[ctx.message.server.id]["mod-channel"]
+    try:
+        if ctx.message.author.server_permissions.kick_members:
+            if user is None:
+                await client.say("Please specify a user for me to kick!")
+                return
+            await client.send_message(user, f"You were kicked from **{server.name}** for the reason of: **{reason}**", inline=False)
+            await client.kick(user)
+            await client.say(":white_check_mark: ***Kicked {user.mention}**")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+            embed.set_author(icon_url=user.avatar_url, name="{user.name} was kicked")
+            embed.add_field(name="Information", value=":tools:Moderator: **{author.name}*** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}")
+            embed.send_message(channel)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Kick Members`` permissions!")
+    except discord.Forbidden:
+        await client.say("Looks like I can't kick this member! Check my permissions.")
+    with open("Mod-data.json", "w") as f:
+        json.dump(mod,f)
+
+    
+ 
+    
     
     
 client.run(os.environ.get('BOT_TOKEN'))
