@@ -46,7 +46,7 @@ async def setmod(ctx, *, channel_name = None):
         mod = json.load(f)
     if ctx.message.author.server_permissions.manage_server:
         if channel_name is None:
-            await client.say("Please specify a server for me to set!")
+            await client.say("Please specify a channel for me to set!")
             return
         if not ctx.message.server.id in mod:
             mod[ctx.message.server.id] = {}
@@ -54,6 +54,26 @@ async def setmod(ctx, *, channel_name = None):
         mod[ctx.message.server.id]["mod-channel"] = channel_name
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
         embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{channel_name}***", inline=False)
+        await client.say(embed=embed)
+    else:
+        await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
+    with open("Mod-data.json", "w") as f:
+        json.dump(mod,f,indent=4)
+        
+@client.command(pass_context=True)
+async def setmute(ctx, *, mute_role = None):
+    with open("Mod-data.json", "r") as f:
+        mod = json.load(f)
+    if ctx.message.author.server_permissions.manage_server:
+        if mute_role is None:
+            await client.say("Please specify a mute role for me to set!")
+            return
+        if not ctx.message.server.id in mod:
+            mod[ctx.message.server.id] = {}
+            mod[ctx.message.server.id]["mute-role"] = "defualt"
+        mod[ctx.message.server.id]["mute-role"] = mute_role
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+        embed.add_field(name=":white_check_mark: Muted Role set to", value=f"***mute_role}***", inline=False)
         await client.say(embed=embed)
     else:
         await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
