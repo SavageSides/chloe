@@ -57,9 +57,10 @@ async def cooldown_error(error, ctx):
 async def setmod(ctx, *, channel_name = None):
     with open("Mod-data.json", "r") as f:
         mod = json.load(f)
+    channel = discord.utils.get(ctx.message.server.channels, name = channel_name)
     if ctx.message.author.server_permissions.manage_server:
-        if channel_name is None:
-            await client.say("Please specify a channel for me to set!")
+        if channel is None:
+            await client.say("Please say a correct channel.")
             return
         if not ctx.message.server.id in mod:
             mod[ctx.message.server.id] = {}
@@ -77,9 +78,10 @@ async def setmod(ctx, *, channel_name = None):
 async def setmute(ctx, *, mute_role = None):
     with open("Mod-data.json", "r") as f:
         mod = json.load(f)
+    Mutrole = discord.utils.get(ctx.message.server.roles, name = mute_role)
     if ctx.message.author.server_permissions.manage_server:
-        if mute_role is None:
-            await client.say("Please specify a mute role for me to set!")
+        if Muterole is None:
+            await client.say("Please say a correct role.")
             return
         if not ctx.message.server.id in mod:
             mod[ctx.message.server.id] = {}
