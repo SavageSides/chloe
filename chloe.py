@@ -92,19 +92,19 @@ async def setmute(ctx, *, mute_role = None):
         json.dump(mod,f,indent=4)
         
 @client.command(pass_context=True)
-async def setwelcome(ctx, *, welcome = None):
+async def setwelcome(ctx, *, text = None):
     with open("Mod-data.json", "r") as f:
         welcome = json.load(f)
     if ctx.message.author.server_permissions.manage_server:
-        if welcome is None:
+        if text is None:
             await client.say("Please specify a welcome message for me to set!")
             return
         if not ctx.message.server.id in welcome :
             welcome[ctx.message.server.id] = {}
             welcome[ctx.message.server.id]["welcome-message"] = "default"
-        welcome[ctx.message.server.id]["welcome-message"] = welcome
+        welcome[ctx.message.server.id]["welcome-message"] = text
         embed = discord.Embed(color=0x4e09ff)
-        embed.add_field(name=":white_check_mark: Set welcome to:", value=f"*{welcome}*", inline=True)
+        embed.add_field(name=":white_check_mark: Set welcome to:", value=f"*{text}*", inline=True)
         await client.say(embed=embed)
     else:
         await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
