@@ -244,7 +244,7 @@ async def purge(ctx, *, amount: int = None):
             await client.delete_messages(messages)
             await client.say(f":white_check_mark:***Cleared {amount}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-            embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was kicked")
+            embed.set_author(icon_url=user.avatar_url, name=f"Chat Was Cleared")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}**\n :thinking:\Amount:**{amount}**\n:inbox_tray:Channel:****{channel.mention}**")
             await client.send_message(channels, embed=embed)
         else:
