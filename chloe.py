@@ -230,7 +230,7 @@ async def purge(ctx, *, amount: int = None):
     with open("Mod-data.json", "r") as f:
         mod = json.load(f)
     modchannel = mod[ctx.message.server.id]["mod-channel"]
-    channels = discord.utils.get(ctx.message.server.channel, name = modchannel)
+    channels = discord.utils.get(ctx.message.server.channels, name = modchannel)
     try:
         if ctx.message.author.server_permissions.manage_messages:
             if amount is None:
