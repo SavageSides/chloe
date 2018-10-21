@@ -267,10 +267,10 @@ async def addrole(ctx, user: discord.Member = None, *, name = None):
                 await client.say("Please specify a correct role.")
                 return
             await client.add_roles(user, role)
-            await client.say(f":white_check_mark:***Removed {name} from {user.name}***")
+            await client.say(f":white_check_mark:***Added {name} to {user.name}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Added Role")
-            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}**")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}** \n :wave:User: **{user.name}**")
             await client.send_message(channels, embed=embed)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
@@ -299,9 +299,9 @@ async def removerole(ctx, user: discord.Member = None, *, name = None):
                 await client.say("Please specify a correct role.")
                 return
             await client.remove_roles(user, role)
-            await client.say(f":white_check_mark:***Added {name} to {user.name}***")
+            await client.say(f":white_check_mark:***Removed {name} from {user.name}***")
             embed.set_author(icon_url=author.avatar_url, name=f"Removed Role")
-            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}**")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}** \n :wave:User: **{user.name}**")
             await client.send_message(channels, embed=embed)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
