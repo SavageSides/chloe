@@ -76,6 +76,8 @@ async def setmod(ctx, *, channel_name = None):
     #if ctx.message.author.server_permissions.manage.server:
         #with open("welcomeleave.json", "r") as f:
         #channel = json.load(f)
+        #if welcomechannel is None:
+            #await client.say("Please specify a channel") --making this into embeds later
 
 #UTILITY
 
