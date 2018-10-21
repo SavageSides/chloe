@@ -131,7 +131,7 @@ async def ban(ctx, user: discord.Member = None, *, reason = None):
                 return
             await client.send_message(user, f"You were banned from **{server.name}** for the reason of: **{reason}**")
             await client.ban(user)
-            await client.say(f":white_check_mark:***Kicked {user.mention}***")
+            await client.say(f":white_check_mark:***Banned {user.mention}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
             embed.set_author(icon_url=user.avatar_url, name=f"{user.name} was banned")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}**")
@@ -139,7 +139,7 @@ async def ban(ctx, user: discord.Member = None, *, reason = None):
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Ban Members`` permissions!")
     except discord.Forbidden:
-        await client.say("Looks like I can't banis member! Check my permissions.")
+        await client.say("Looks like I can't ban this member! Check my permissions.")
     with open("Mod-data.json", "w") as f:
         json.dump(kick,f)
         
