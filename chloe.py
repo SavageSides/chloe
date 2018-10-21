@@ -47,7 +47,7 @@ async def help(ctx):
     await client.say(embed=embed)
 
 @client.command(pass_context = True)
-async invite(ctx):
+async def invite(ctx):
     embed.add_field(name = "Inivte me to the server by clicking on 'link' below", value = "[link](https://discordapp.com/oauth2/authorize?client_id=503386558976622593&permissions=2146958839&scope=bot)", inline = False)
     await client.say(embed = embed)
     
