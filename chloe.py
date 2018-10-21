@@ -111,6 +111,28 @@ async def setwelcome(ctx, *, text = None):
     with open("Mod-data.json", "w") as f:
         json.dump(welcome,f,indent=4)
         
+@client.command(pass_context=True)
+async def setgoodbye(ctx, *, text = None):
+    with open("Mod-data.json", "r") as f:
+        welcome = json.load(f)
+    if ctx.message.author.server_permissions.manage_server:
+        if text is None:
+            await client.say("Please specify a goodbye message for me to set!")
+            return
+        if not ctx.message.server.id in welcome :
+            welcome[ctx.message.server.id] = {}
+            welcome[ctx.message.server.id]["goodbye-message"] = "default"
+        welcome[ctx.message.server.id]["goodbye-message"] = text
+        embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+        embed.add_field(name=":white_check_mark: Set goodbye to:", value=f"*{text}*", inline=True)
+        await client.say(embed=embed)
+    else:
+        await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
+    with open("Mod-data.json", "w") as f:
+        json.dump(welcome,f,indent=4)
+        
+
+        
         
 
 #UTILITY
