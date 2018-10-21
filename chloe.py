@@ -198,7 +198,7 @@ async def crole(ctx, *, role = None):
             if role is None:
                 await client.say("Please specify a correct role.")
                 return
-            await client.create_role(server=server, role=role)
+            await client.create_role(server=server, name=role)
             await client.say(f":white_check_mark:***Created {role}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Created Role")
