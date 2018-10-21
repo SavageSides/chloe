@@ -150,7 +150,7 @@ async def mute(ctx, user: discord.Member = None, *, reason = None):
     role = mute[ctx.message.server.id]["mute-role"]
     MutedRole = discord.utils.get(ctx.message.server.roles, name = role)
     modchannel = mute[ctx.message.server.id]["mod-channel"]
-    mod-log = discord.utils.get(ctx.message.server.channel, name = modchannel)
+    channels = discord.utils.get(ctx.message.server.channels, name = modchannel)
     try:
         if ctx.message.author.server_permissionsmute_members:
             if MutedRole is None:
