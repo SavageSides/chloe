@@ -16,16 +16,16 @@ client.remove_command('help')
 
 @client.event
 async def on_server_join(server):
-    await client.change_presence(game=discord.Game(name=f"{len(client.servers)}(s)", type=3))
+    await client.change_presence(game=discord.Game(name=f"{len(client.servers)} server(s)", type=3))
 
 @client.event
 async def on_server_remove(server):
-    await client.change_presence(game=discord.Game(name=f"{len(client.servers)}(s)", type=3))
+    await client.change_presence(game=discord.Game(name=f"{len(client.servers)} server(s)", type=3))
 
 @client.event
 async def on_ready():
     print("Chloes Ready")
-    await client.change_presence(game=discord.Game(name=f"{len(client.servers)}(s)", type=3))
+    await client.change_presence(game=discord.Game(name=f"{len(client.servers)} server(s)", type=3))
     
 @client.command()
 async def on():
