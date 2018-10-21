@@ -1,6 +1,10 @@
 import discord
 from discord.ext import commands
 import aiohttp
+import random
+import json
+import asyncio
+import time
 import os
 
 client = commands.Bot(command_prefix="?")
