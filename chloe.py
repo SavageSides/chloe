@@ -19,7 +19,14 @@ async def on():
     await client.say("I am online on heroku! Wrong, and Savage")
 
 #FUN COMMANDS:
-
+@client.command(pass_context=True, aliases = ["8ball"])
+async def eightball(ctx, question):
+    pick = ['Yes','No', 'Ask again']
+    choice = random.choice(pick)
+    embed = discord.Embed(color = 0x00ff00)
+    embed.add_field(name= question, value = choice, inline = False)
+    await client.say(embed=embed)
+    return     
 
 @client.command(pass_context = True)
 @commands.cooldown(5, 10, commands.BucketType.user)
