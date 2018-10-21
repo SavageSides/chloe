@@ -17,6 +17,14 @@ client.remove_command('help')
 @client.event
 async def on_server_join(server):
     await client.change_presence(game=discord.Game(name=f"{len(client.servers)} server(s)", type=3))
+    owner = server.owner
+    embed = discord.Embed(color=(random.randint(0, 0xffffff)))
+    embed.add_field(name=":wave: Hey there!", value="My name is chloe! I see you have invited me to your server! I have 4 devs! Amazing right? Well you will need to set up some things for me to function with moderation commands!", inline=False)
+    embed.add_field(name=":one:", value="You will need to set a mod-log! \n **?setmod <mod-channel>** \n This command will send every moderation command of me to that channel!", inline=False)
+    embed.add_field(name=":two:", value="You will need to set a muted role! \n **?setmute <Muterole>** \n This command will mute eveyone that you mention with **?mute @Tony**", inline=False)
+    embed.add_field(name=":wave: Goodbye!", value="Goodbye! I have to assist your server now... oh and also type **?help** for more commands!", inline=False)
+    await client.send_message(owner, embed=embed)
+    
 
 @client.event
 async def on_server_remove(server):
