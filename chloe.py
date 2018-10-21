@@ -46,6 +46,11 @@ async def help(ctx):
     embed.add_field(name="Help", value="If you want to know more about me to go my [wesbite](https://ytsparkyt.github.io/Chloe/Home.html)", inline=False)
     await client.say(embed=embed)
 
+@client.command(pass_context = True)
+async invite(ctx):
+    embed.add_field(name = "Inivte me to the server by clicking on 'link' below", value = "[link](https://discordapp.com/oauth2/authorize?client_id=503386558976622593&permissions=2146958839&scope=bot)", inline = False)
+    await client.say(embed = embed)
+    
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
 async def eightball(ctx, *, question):
