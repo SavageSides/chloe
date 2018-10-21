@@ -101,11 +101,11 @@ async def kick(ctx, user: discord.Member = None, *, reason = None):
                 return
             await client.send_message(user, f"You were kicked from **{server.name}** for the reason of: **{reason}**")
             await client.kick(user)
-            await client.say(":white_check_mark: ***Kicked {user.mention}**")
+            await client.say(f":white_check_mark:***Kicked {user.mention}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)))
             embed.set_author(icon_url=user.avatar_url, name="{user.name} was kicked")
             embed.add_field(name="Information", value=":tools:Moderator: **{author.name}*** \n :wave:User: **{user.name}** \n :interrobang:Reason:**{reason}")
-            embed.send_message(channel)
+            embed.send_message(channel, embed=embed)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Kick Members`` permissions!")
     except discord.Forbidden:
