@@ -21,8 +21,7 @@ async def on():
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
 async def eightball(ctx, question):
-    pick = ['Yes','No', 'Ask again']
-    choice = random.choice(pick)
+    choice = magic_py_ball.answer(question)
     embed = discord.Embed(color = 0x00ff00)
     embed.add_field(name= question, value = choice, inline = False)
     await client.say(embed=embed)
