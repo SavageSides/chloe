@@ -26,7 +26,7 @@ async def on():
 async def help(ctx):
     embed = discord.Embed(color=(random.randint(0, 0xfffff)))
     embed.add_field(name="Help", value="If you need help controling me join the [support server](https://discord.gg/EGetAqk)")
-    embed.add_field(name="Fun Commands", value="``?rate`` ``?meme`` ?8ball`` ``?on``", inline=False)
+    embed.add_field(name="Fun Commands", value="``?rate`` ``?meme`` ``?8ball`` ``?on``", inline=False)
     embed.add_field(name="Config Commands", value="``?setmod`` ``?setmute`` ``?setwelcome`` ``?setgoodbye`` ``?setchannel``", inline=False)
     embed.add_field(name="Utility Commands", value="``?serverinfo`` ``?userinfo`` ``?avatar``", inline=False)
     embed.add_field(name="Roleplay Commands", value="``?crole`` ``?drole`` ``?addrole`` ``?removerole`` ``?rolecolor``", inline=False)
@@ -34,6 +34,7 @@ async def help(ctx):
     embed.add_field(name="Currency Commands", value="``?addmoney`` ``?removemoney`` ``?work`` ``?daily`` ``?slots`` ``?givemoney`` ``?crate`` ``?crates`` ``?bal``", inline=False)
     embed.add_field(name="Image Commands", value="``?dog`` ``?cat`` ``?shibe`` ``?duck`` ``?bird``", inline=False)
     embed.add_field(name="Neko Commands", value="``?slap`` ``?hug`` ``?cuddle`` ``?kiss``", inline=False)
+    embed.add_field(name="Help", value="If you want to know more about me to go my [wesbite](https://ytsparkyt.github.io/Chloe/Home.html)", inline=False)
     await client.say(embed=embed)
 
 #FUN COMMANDS:
