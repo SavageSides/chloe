@@ -44,18 +44,16 @@ async def cooldown_error(error, ctx):
 async def setmod(ctx, *, channel_name = None):
     with open("Mod-data.json", "r") as f:
         mod = json.load(f)
-    channel = ctx.message.channel
-    mod-channel = discord.utils.get(ctx.message.server.channels, name = channel_name)
     if ctx.message.author.server_permissions.manage_server:
-        if mod-channel is None:
-            await client.say("Please specify a channel in this server!")
+        if channel_name is None:
+            await client.say("Please specify a server for me to set!")
             return
         if not ctx.message.server.id in mod:
             mod[ctx.message.server.id] = {}
             mod[ctx.message.server.id]["mod-channel"] = "defualt"
-        mod[ctx.message.server.id]["mod-channel"] = mod-channel
+        mod[ctx.message.server.id]["mod-channel"] = channel_name
         embed = discord.Embed(color=(random.randint(0, 0xffffff)))
-        embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{no-channel}***", inline=False)
+        embed.add_field(name=":white_check_mark: Mod-Log set to", value=f"***{channel_name}***", inline=False)
         await client.say(embed=embed)
     else:
         await client.say(f"{ctx.message.author.mention}, You need ``Manage Server`` permissions!")
