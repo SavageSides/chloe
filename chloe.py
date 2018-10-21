@@ -24,8 +24,7 @@ async def on():
 #FUN COMMANDS:
 @client.command(pass_context=True, aliases = ["8ball"])
 async def eightball(ctx, *, question):
-    author = ctx.message.author
-    choice = ['Yes', 'No', 'Better not tell you now']
+    choice = magic_py_ball.answer(question)
     embed = discord.Embed(color = 0x00ff00)
     embed.add_field(name= "**"+question+"**", value = choice, inline = False)
     embed.set_footer(icon_url=author.avatar_url, text="Fun Commands!")
@@ -182,6 +181,129 @@ async def avatar(ctx, user: discord.Member = None):
 #MODERARION COMMANDS:
 
 @client.command(pass_context=True)
+async def crole(ctx, *, role = None):
+    server = ctx.message.server
+    author = ctx.message.author
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    try:
+        if ctx.message.author.server_permissions.manage_roles:
+            if role is None:
+                await client.say("Please specify a correct role.")
+                return
+            await client.say(f":white_check_mark:***Deleted {name}***")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
+            embed.set_author(icon_url=user.avatar_url, name=f"Created Role")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{role}")
+            await client.send_message(channels, embed=embed)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
+    except discord.Forbidden:
+            await client.say("I need manage roles permissions.")
+        
+@client.command(pass_context=True)
+async def drole(ctx, *, name = None):
+    server = ctx.message.server
+    author = ctx.message.author
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    try:
+        if ctx.message.author.server_permissions.manage_roles:
+            role = discord.utils.get(ctx.message.server.roles, name=name)
+            if role is None:
+                await client.say("Please specify a correct role.")
+                return
+            await client.delete_role(server=server, role=role)
+            await client.say(f":white_check_mark:***Deleted {name}***")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
+            embed.set_author(icon_url=user.avatar_url, name=f"Deleted Role")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}**")
+            await client.send_message(channels, embed=embed)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
+    except discord.Forbidden:
+            await client.say("I need manage roles permissions.")
+        
+@client.command(pass_context=True)
+async def addrole(ctx, user: discord.Member = None, *, name = None):
+    author = ctx.message.author
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    try:
+        if ctx.message.author.server_permissions.manage_roles:
+            role = discord.utils.get(ctx.message.server.roles, name=name)
+            if user is None:
+                await client.say("Please specify a user!")
+                return
+            if role is None:
+                await client.say("Please specify a correct role.")
+                return
+            await client.add_roles(user, role)
+            await client.say(f":white_check_mark:***Removed {name} from {user.name}***")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
+            embed.set_author(icon_url=user.avatar_url, name=f"Added Role")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}**")
+            await client.send_message(channels, embed=embed)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
+    except discord.Forbidden:
+            await client.say("I need manage roles permissions.")
+        
+@client.command(pass_context=True)
+async def removerole(ctx, user: discord.Member = None, *, name = None):
+    author = ctx.message.author
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    try:
+        if ctx.message.author.server_permissions.manage_roles:
+            role = discord.utils.get(ctx.message.server.roles, name=name)
+            if user is None:
+                await client.say("Please specify a user!")
+                return
+            if role is None:
+                await client.say("Please specify a correct role.")
+                return
+            await client.remove_roles(user, role)
+            await client.say(f":white_check_mark:***Added {name} to {user.name}***")
+            embed.set_author(icon_url=user.avatar_url, name=f"Removed Role")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}**")
+            await client.send_message(channels, embed=embed)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
+    except discord.Forbidden:
+            await client.say("I need manage roles permissions.")
+        
+@client.command(pass_context=True, no_pm=True)
+async def rolecolor(ctx, colour : discord.Colour = None, *, name = None):
+    author = ctx.message.author
+    if ctx.message.author.bot:
+        await client.say("Bots can't use commands.")
+        return
+    try:
+        if ctx.message.author.server_permissions.manage_roles:
+            roles = discord.utils.get(ctx.message.server.roles, name=name)
+            if roles is None:
+                await client.say("Please specify a correct role.")
+                return
+            if colour is None:
+                await client.say("Please specify a color for me to edit the role")
+                return
+            await client.edit_role(ctx.message.server, roles, colour=colour)
+            await client.say(f":white_check_mark:***Edited {name}'s color***")
+            embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
+            embed.set_author(icon_url=author.avatar_url, name=f"Edited Role")
+            embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}** \n :thinking:Role: **{name}** \n :tada:Color: **#{colour}**")
+            await client.send_message(channels, embed=embed)
+        else:
+            await client.say(f"{ctx.message.author.mention}, You need ``Manage Roles`` permissions!")
+    except discord.Forbidden:
+        await client.say("I need manage roles permissions.")
+
+@client.command(pass_context=True)
 async def kick(ctx, user: discord.Member = None, *, reason = None):
     with open("Mod-data.json", "r") as f:
         kick = json.load(f)
@@ -326,17 +448,23 @@ async def purge(ctx, *, amount: int = None):
             async for message in client.logs_from(channel, limit=int(amount)):
                 messages.append(message)
             await client.delete_messages(messages)
-            await client.say(f":white_check_mark:***Cleared {amount}***")
+            msg = await client.say(f":white_check_mark:***Cleared {amount}***")
             embed = discord.Embed(color=(random.randint(0, 0xffffff)), timestamp=datetime.datetime.utcnow())
             embed.set_author(icon_url=author.avatar_url, name=f"Chat Was Cleared")
             embed.add_field(name="Information", value=f":tools:Moderator: **{author.name}**\n :thinking:Amount:**{amount}**\n:inbox_tray:Channel:**{channel.mention}**")
             await client.send_message(channels, embed=embed)
+            await asynco.sleep(4)
+            await client.delete_message(msg)
         else:
             await client.say(f"{ctx.message.author.mention}, You need ``Manage Messages`` permissions!")
     except discord.Forbidden:
         await client.say("I can't clear the chat, I do not have permissions!")
     with open("Mod-data.json", "r") as f:
         json.dump(mod,f)
+        
+#Logging Actions Of Users
+
+
         
     
         
